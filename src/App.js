@@ -14,8 +14,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        {ruta == 'lista' && <ViewList/>}
-        {ruta == 'formulario' && <UserForm/>}
+        {ruta === 'lista' && <ViewList/>}
+        {ruta === 'formulario' && <UserForm/>}
       </div>
     );
   }

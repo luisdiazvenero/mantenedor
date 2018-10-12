@@ -1,9 +1,15 @@
 import React, {Component} from 'react'
+import Cabecera from './Cabecera'
+import Lista from './Lista'
 
 class ViewList extends Component {
   render(){
     return(
-      'Vista de Lista'
+      <div>
+        <Cabecera/>
+        <Lista/>
+      </div>
+
     )
   }
 }
