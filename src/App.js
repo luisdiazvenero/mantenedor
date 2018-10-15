@@ -36,6 +36,17 @@ class App extends Component {
     })
   }
 
+  actualizarNuevoUsuario = (id, values) => {
+    axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, values)
+      .then(()=>{
+        const newData = this.state.data.map(x => x.id === id ? values : x)
+        this.setState({
+          data: newData,
+          ruta: 'lista'
+        })
+      })
+  }
+
   nuevoUsuario = () => {
     this.setState({
       ruta: 'formulario'
@@ -44,7 +55,9 @@ class App extends Component {
 
   render() {
 
-    const {ruta, data} = this.state
+    const {ruta, data, usuarioSeleccionado} = this.state
+    const valoresIniciales = usuarioSeleccionado && data.find(x => x.id === usuarioSeleccionado)
+    console.log(valoresIniciales)
 
     return (
       <div className="App">
@@ -53,7 +66,12 @@ class App extends Component {
           handleClick={this.seleccionUsuario}
           data={data}
         />}
-        {ruta === 'formulario' && <UserForm handleSubmit={this.agregarNuevoUsuario}/>}
+        {ruta === 'formulario' && <UserForm
+          valoresIniciales={valoresIniciales || {}}
+          handleSubmit={this.agregarNuevoUsuario}
+          handleUpdate={this.actualizarNuevoUsuario}
+        />}
+
       </div>
     );
   }
