@@ -34,6 +34,8 @@ class UserForm extends Component {
     this.setState({errors: result})
 
     if(!Object.keys(result).length){
+      const {handleSubmit} = this.props
+      handleSubmit(sinErrors)
       // envio de formulario
       e.target.reset()
     }

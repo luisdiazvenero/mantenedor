@@ -9,7 +9,7 @@ import ViewList from './components/ViewList'
 class App extends Component {
   state={
     data: [],
-    ruta: 'formulario',
+    ruta: 'lista',
   }
 
   constructor(){
@@ -22,6 +22,17 @@ class App extends Component {
     this.setState({
       ruta: 'formulario',
       usuarioSeleccionado: id
+    })
+  }
+
+  agregarNuevoUsuario = usuario => {
+    axios.post('https://jsonplaceholder.typicode.com/users', usuario)
+    .then(({data}) => {
+      const newData = this.state.data.concat(data)
+      this.setState({
+        data: newData,
+        ruta: 'lista'
+      })
     })
   }
 
@@ -42,7 +53,7 @@ class App extends Component {
           handleClick={this.seleccionUsuario}
           data={data}
         />}
-        {ruta === 'formulario' && <UserForm/>}
+        {ruta === 'formulario' && <UserForm handleSubmit={this.agregarNuevoUsuario}/>}
       </div>
     );
   }
