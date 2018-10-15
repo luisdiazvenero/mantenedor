@@ -9,7 +9,7 @@ import ViewList from './components/ViewList'
 class App extends Component {
   state={
     data: [],
-    ruta: 'lista',
+    ruta: 'formulario',
   }
 
   constructor(){
@@ -25,6 +25,12 @@ class App extends Component {
     })
   }
 
+  nuevoUsuario = () => {
+    this.setState({
+      ruta: 'formulario'
+    })
+  }
+
   render() {
 
     const {ruta, data} = this.state
@@ -32,6 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         {ruta === 'lista' && <ViewList
+          nuevoUsuario={this.nuevoUsuario}
           handleClick={this.seleccionUsuario}
           data={data}
         />}
