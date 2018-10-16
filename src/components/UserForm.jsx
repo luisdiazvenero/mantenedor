@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Button, FormGroup, InputGroup } from "@blueprintjs/core"
 
 //validaciones de campos de formulario
 const validate = values => {
@@ -43,13 +44,12 @@ class UserForm extends Component {
 
     if(!Object.keys(result).length){
       const {handleSubmit, handleUpdate, valoresIniciales} = this.props
+
       if(valoresIniciales.id) {
         handleUpdate(valoresIniciales.id, sinErrors)
       } else {
         handleSubmit(sinErrors)
       }
-
-      // envio de formulario
 
     } else {
       this.setState({errors: result})
@@ -58,21 +58,53 @@ class UserForm extends Component {
   }
 
   render(){
+
     const {errors} = this.state
     const {valoresIniciales} = this.props
+
+
+
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input defaultValue={valoresIniciales.name} placeholder="Nombre" name="name" onChange={this.handleChange}></input>
-        {errors.name && <p>{errors.name}</p>}
+      <div>
+        <header>
+           <h3 className="bp3-heading">Editor de Usuarios</h3>
+        </header>
 
-        <input defaultValue={valoresIniciales.email} placeholder="Email" name="email" onChange={this.handleChange}></input>
-        {errors.email && <p>{errors.email}</p>}
+        <form onSubmit={this.handleSubmit}>
 
-        <input defaultValue={valoresIniciales.website} placeholder="Website" name="website" onChange={this.handleChange}></input>
-        {errors.website && <p>{errors.website}</p>}
+          <FormGroup
+              helperText={errors.name}
+              label="Nombre"
+              labelFor="text-input"
+              labelInfo="(obligatorio)"
+          >
+              <InputGroup id="text-input" defaultValue={valoresIniciales.name} placeholder="Ingresa el nombre completo" name="name" onChange={this.handleChange}/>
+          </FormGroup>
 
-        <input type="submit" value="Enviar" />
-      </form>
+          <FormGroup
+              helperText={errors.email}
+              label="Email"
+              labelFor="text-mail"
+              labelInfo="(obligatorio)"
+          >
+              <InputGroup id="text-mail" defaultValue={valoresIniciales.email} placeholder="Ingresa el email" name="email" onChange={this.handleChange}/>
+          </FormGroup>
+
+          <FormGroup
+              helperText={errors.website}
+              label="Website"
+              labelFor="text-website"
+              labelInfo="(obligatorio)"
+          >
+              <InputGroup id="text-website" defaultValue={valoresIniciales.website} placeholder="Ingresa el website" name="website" onChange={this.handleChange}/>
+          </FormGroup>
+
+          <Button type="submit" rightIcon="floppy-disk" intent="success" text="Guardar" />
+
+
+        </form>
+      </div>
+
     )
   }
 }

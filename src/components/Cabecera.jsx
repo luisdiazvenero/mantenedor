@@ -1,17 +1,16 @@
 import React, {Component} from 'react'
+import { Button } from "@blueprintjs/core"
 
-const styles = {
-  inline: {
-    display: 'inline'
-  }
-}
+
 class Cabecera extends Component {
   render(){
     const {nuevoUsuario} = this.props
     return(
       <header>
-        <h2 style={styles.inline}>Usuarios</h2>
-        <button style={styles.inline} onClick={nuevoUsuario}>Nuevo usurio</button>
+         <h3 className="bp3-heading">Mantenedor de Usuarios</h3>
+
+        <Button rightIcon="arrow-right" intent="success" text="Agregar usuario" onClick={nuevoUsuario} />
+
       </header>
     )
   }

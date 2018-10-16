@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+
+import { Card, Elevation } from "@blueprintjs/core";
 
 import UserForm from './components/UserForm'
 import ViewList from './components/ViewList'
@@ -49,7 +51,8 @@ class App extends Component {
 
   nuevoUsuario = () => {
     this.setState({
-      ruta: 'formulario'
+      ruta: 'formulario',
+      usuarioSeleccionado: undefined
     })
   }
 
@@ -57,22 +60,24 @@ class App extends Component {
 
     const {ruta, data, usuarioSeleccionado} = this.state
     const valoresIniciales = usuarioSeleccionado && data.find(x => x.id === usuarioSeleccionado)
-    console.log(valoresIniciales)
+
+
 
     return (
-      <div className="App">
+      <Card interactive={false} elevation={Elevation.TWO}>
         {ruta === 'lista' && <ViewList
           nuevoUsuario={this.nuevoUsuario}
           handleClick={this.seleccionUsuario}
           data={data}
         />}
+
         {ruta === 'formulario' && <UserForm
           valoresIniciales={valoresIniciales || {}}
           handleSubmit={this.agregarNuevoUsuario}
           handleUpdate={this.actualizarNuevoUsuario}
         />}
+      </Card>
 
-      </div>
     );
   }
 }
